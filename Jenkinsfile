@@ -5,12 +5,15 @@ pipeline {
     }
 
     tools {
-        maven "M3",
-        jdk "openjdk-11"
+        // Install the Maven version configured as "M3" and add it to the path.
+        maven "M3"
     }
 
     stages {
         stage('Build') {
+            tools {
+               jdk "openjdk-11"
+            }
             steps {
                 sh 'java -version'
 

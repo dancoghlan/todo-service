@@ -37,7 +37,7 @@ pipeline {
         stage('SonarQube') {
                steps {
                    script {
-                   def scannerHome = tool 'sonarqube';
+                   def scannerHome = tool 'sonarqube-scanner';
                        withSonarQubeEnv("sonarqube-container") {
                            sh "${tool("sonarqube")}/bin/sonar-scanner \
                            -Dsonar.projectKey=todo-service \

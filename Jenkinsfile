@@ -22,9 +22,6 @@ pipeline {
 
                 // Run Maven on a Unix agent.
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
-
-                // To run Maven on a Windows agent, use
-                //bat "mvn -Dmaven.test.failure.ignore=true clean package"
             }
 
             post {
@@ -37,4 +34,19 @@ pipeline {
             }
         }
     }
+
+    stage('SonarQube Code Quality Check') {
+       steps {
+           script {
+           def scannerHome = tool 'sonarqube';
+               withSonarQubeEnv("sonarqube-container") {
+                   sh "${tool("sonarqube")}/bin/sonar-scanner \
+                   -Dsonar.projectKey=todo-service \
+                   -Dsonar.sources=. \
+                   -Dsonar.host.url=http://localhost:9000 \
+                   -Dsonar.login=66441a8e51ffd4189655d37208d127b55b95d60e"
+               }
+           }
+       }
+   }
 }

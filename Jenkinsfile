@@ -33,20 +33,5 @@ pipeline {
                 }
             }
         }
-
-        stage('SonarQube') {
-               steps {
-                   script {
-                   def scannerHome = tool 'sonarqube-scanner';
-                       withSonarQubeEnv("sonarqube-container") {
-                           sh "${tool("sonarqube")}/bin/sonar-scanner \
-                           -Dsonar.projectKey=todo-service \
-                           -Dsonar.sources=. \
-                           -Dsonar.host.url=http://localhost:9000 \
-                           -Dsonar.login=66441a8e51ffd4189655d37208d127b55b95d60e"
-                       }
-                   }
-               }
-           }
     }
 }

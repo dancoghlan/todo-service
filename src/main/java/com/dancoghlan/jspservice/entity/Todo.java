@@ -5,13 +5,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Date;
 
-@EqualsAndHashCode
-@Getter
-@Setter
-@ToString
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Builder(builderClassName = "Builder")
 @Entity
 @Table(name = "Todo")
 public class Todo {
